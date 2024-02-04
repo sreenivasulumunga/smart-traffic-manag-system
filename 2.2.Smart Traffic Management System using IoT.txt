@@ -1,0 +1,54 @@
+#include <iostream>
+#include <ctime>
+#include <thread>
+#include <chrono>
+
+class TrafficManagementSystem {
+private:
+    bool emergencyVehicleApproaching;
+    bool trafficViolatorDetected;
+
+public:
+    TrafficManagementSystem() : emergencyVehicleApproaching(false), trafficViolatorDetected(false) {}
+
+    void detectEmergencyVehicle() {
+        // Simulate emergency vehicle detection (e.g., using sensors)
+        emergencyVehicleApproaching = (rand() % 2 == 0);  // Simulating a 50% chance of an emergency vehicle approaching
+    }
+
+    void detectTrafficViolator() {
+        // Simulate traffic violator detection (e.g., using cameras)
+        trafficViolatorDetected = (rand() % 2 == 0);  // Simulating a 50% chance of detecting a traffic violator
+    }
+
+    void manageTraffic() {
+        if (emergencyVehicleApproaching) {
+            std::cout << "Emergency vehicle approaching! Clearing the path." << std::endl;
+            // Add code here to control traffic and provide a dedicated pathway for emergency vehicles
+        } else if (trafficViolatorDetected) {
+            std::cout << "Traffic violator detected! Taking necessary actions." << std::endl;
+            // Add code here to enforce traffic rules and penalize violators
+        } else {
+            std::cout << "Normal traffic flow." << std::endl;
+        }
+    }
+};
+
+int main() {
+    srand(time(0));  // Seed for random values
+
+    TrafficManagementSystem trafficSystem;
+
+    for (int i = 0; i < 5; ++i) {
+        trafficSystem.detectEmergencyVehicle();
+        trafficSystem.detectTrafficViolator();
+        trafficSystem.manageTraffic();
+        
+        // Simulate some delay between iterations
+        std::this_thread::sleep_for(std::chrono::seconds(3));
+
+        std::cout << "---------------------" << std::endl;
+    }
+
+    return 0;
+}
